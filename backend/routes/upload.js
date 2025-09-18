@@ -183,6 +183,27 @@ router.get('/template', (req, res) => {
   res.send(template);
 });
 
+// Get all books for the authenticated user
+router.get('/books', async (req, res) => {
+  try {
+    const books = await prisma.book.findMany({
+      where: { userId: req.user.id },
+      select: {
+        id: true,
+        title: true,
+        isbn: true,
+        publishedAt: true
+      },
+      orderBy: { createdAt: 'desc' }
+    });
+
+    res.json({ books });
+  } catch (error) {
+    console.error('Get books error:', error);
+    res.status(500).json({ message: 'Failed to fetch books' });
+  }
+});
+
 // Get supported platforms
 router.get('/platforms', (req, res) => {
   const platforms = [

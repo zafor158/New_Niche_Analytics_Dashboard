@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../utils/api';
 import toast from 'react-hot-toast';
 import { Upload as UploadIcon, Download, FileText, CheckCircle, AlertCircle } from 'lucide-react';
 
@@ -19,7 +19,7 @@ const Upload = () => {
 
   const fetchBooks = async () => {
     try {
-      const response = await axios.get('/api/books');
+      const response = await api.get('/api/upload/books');
       setBooks(response.data.books);
     } catch (error) {
       console.error('Error fetching books:', error);
@@ -29,7 +29,7 @@ const Upload = () => {
 
   const fetchPlatforms = async () => {
     try {
-      const response = await axios.get('/api/upload/platforms');
+      const response = await api.get('/api/upload/platforms');
       setPlatforms(response.data.platforms);
     } catch (error) {
       console.error('Error fetching platforms:', error);
@@ -74,7 +74,7 @@ const Upload = () => {
 
     try {
       setUploading(true);
-      const response = await axios.post('/api/upload/csv', formData, {
+      const response = await api.post('/api/upload/csv', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -100,7 +100,7 @@ const Upload = () => {
 
   const downloadTemplate = async () => {
     try {
-      const response = await axios.get('/api/upload/template', {
+      const response = await api.get('/api/upload/template', {
         responseType: 'blob'
       });
       

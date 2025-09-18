@@ -6,8 +6,8 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider = "sqlite"
+  url      = "file:./dev.db"
 }
 
 model User {
@@ -50,8 +50,8 @@ model Sale {
   id        String   @id @default(cuid())
   date      DateTime
   units     Int
-  revenue   Decimal  @db.Decimal(10, 2)
-  royalty   Decimal  @db.Decimal(10, 2)
+  revenue   Decimal
+  royalty   Decimal
   platform String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
