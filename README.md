@@ -1,81 +1,223 @@
-# Niche Analytics Dashboard
+# 📊 Niche Analytics Dashboard
 
-A specialized dashboard for independent authors to track book sales metrics from various platforms.
+A comprehensive analytics dashboard designed specifically for independent authors to track book sales, revenue, and performance metrics across multiple platforms.
 
-## Features
+![Dashboard Preview](https://via.placeholder.com/800x400/4F46E5/FFFFFF?text=Niche+Analytics+Dashboard)
 
-- User authentication and registration
-- CSV file upload for sales data from multiple platforms (Amazon KDP, Gumroad, etc.)
-- Interactive data visualization with charts and tables
-- Sales analytics and reporting
-- Multi-platform sales tracking
+## ✨ Features
 
-## Tech Stack
+### 📈 **Analytics & Reporting**
+- **Real-time Dashboard**: Overview of sales performance with key metrics
+- **Interactive Charts**: Monthly sales trends, platform breakdowns, and revenue analytics
+- **Custom Date Ranges**: Filter data by specific time periods
+- **Export Capabilities**: Download reports and data for external analysis
 
-- **Frontend**: React with Chart.js for visualizations
-- **Backend**: Node.js/Express with JWT authentication
-- **Database**: PostgreSQL with Prisma ORM
-- **File Processing**: CSV parsing and data aggregation
+### 📚 **Book Management**
+- **Book Catalog**: Manage your entire book portfolio
+- **Sales Tracking**: Record and monitor sales across different platforms
+- **Revenue Analytics**: Track royalties, revenue, and profit margins
+- **Platform Integration**: Support for Amazon KDP, Gumroad, BookBaby, and more
 
-## Getting Started
+### 🔐 **User Management**
+- **Secure Authentication**: JWT-based authentication system
+- **User Profiles**: Personalize your dashboard experience
+- **Data Privacy**: Your data is secure and private
+
+### 📁 **Data Import/Export**
+- **CSV Upload**: Bulk import sales data from spreadsheets
+- **Data Validation**: Automatic validation and error checking
+- **Export Options**: Download your data in various formats
+
+## 🚀 Tech Stack
+
+### **Frontend**
+- **React 18** - Modern UI framework
+- **Tailwind CSS** - Utility-first CSS framework
+- **Chart.js** - Interactive data visualization
+- **React Router** - Client-side routing
+- **Axios** - HTTP client for API calls
+- **React Hot Toast** - Beautiful notifications
+
+### **Backend**
+- **Node.js** - JavaScript runtime
+- **Express.js** - Web application framework
+- **Prisma ORM** - Database toolkit
+- **PostgreSQL** - Relational database
+- **JWT** - JSON Web Tokens for authentication
+- **Bcrypt** - Password hashing
+
+### **DevOps & Deployment**
+- **Vercel** - Frontend and backend deployment
+- **GitHub Actions** - CI/CD pipeline
+- **Environment Variables** - Secure configuration management
+
+## 🛠️ Installation & Setup
 
 ### Prerequisites
-
 - Node.js (v16 or higher)
 - PostgreSQL database
-- npm or yarn
+- Git
 
-### Installation
+### Local Development
 
-1. Clone the repository
-2. Install dependencies:
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/zafor158/Niche-Analytics-Dashboard.git
+   cd Niche-Analytics-Dashboard
+   ```
+
+2. **Install dependencies**
    ```bash
    npm run install-all
    ```
 
-3. Set up environment variables:
-   - Copy `.env.example` to `.env` in the backend directory
-   - Configure your database connection and JWT secret
-
-4. Run database migrations:
+3. **Set up environment variables**
    ```bash
+   # Backend
    cd backend
-   npx prisma migrate dev
+   cp env.example .env
+   # Edit .env with your database credentials
    ```
 
-5. Start the development servers:
+4. **Set up the database**
    ```bash
+   # Generate Prisma client
+   npx prisma generate
+   
+   # Run database migrations
+   npx prisma migrate dev
+   
+   # Seed the database with sample data
+   npm run seed
+   ```
+
+5. **Start the development servers**
+   ```bash
+   # From root directory
    npm run dev
    ```
 
-The application will be available at:
-- Frontend: http://localhost:3000
-- Backend API: http://localhost:5000
+6. **Access the application**
+   - Frontend: http://localhost:3000
+   - Backend API: http://localhost:5000
 
-## Project Structure
+### Demo Credentials
+- **Email**: `demo@author.com`
+- **Password**: `password123`
 
-```
-├── frontend/          # React application
-├── backend/           # Node.js/Express API
-├── package.json       # Root package.json for scripts
-└── README.md         # This file
-```
+## 🚀 Deployment
 
-## Usage
+### Vercel Deployment (Recommended)
 
-1. Register a new account or log in
-2. Add your books to the system
-3. Upload CSV files with sales data
-4. View analytics and charts on the dashboard
-5. Track sales performance across different platforms
+1. **Set up production database**
+   - [Neon](https://neon.tech) (Free tier available)
+   - [Supabase](https://supabase.com) (Free tier available)
+   - [Railway](https://railway.app) (Free tier available)
 
-## Contributing
+2. **Deploy Backend**
+   ```bash
+   cd backend
+   vercel
+   ```
+
+3. **Deploy Frontend**
+   ```bash
+   cd frontend
+   vercel
+   ```
+
+4. **Configure Environment Variables**
+   - Set up production database URL
+   - Configure JWT secrets
+   - Update CORS settings
+
+For detailed deployment instructions, see [DEPLOYMENT.md](./DEPLOYMENT.md).
+
+## 📊 Database Schema
+
+### Users
+- User authentication and profile information
+- Secure password hashing with bcrypt
+
+### Books
+- Book metadata (title, ISBN, description)
+- Publication dates and cover images
+- User ownership and relationships
+
+### Sales
+- Sales transactions with date, units, and revenue
+- Platform information and royalty tracking
+- Book relationships and user filtering
+
+## 🔧 API Endpoints
+
+### Authentication
+- `POST /api/auth/register` - User registration
+- `POST /api/auth/login` - User login
+- `GET /api/auth/me` - Get current user
+
+### Books
+- `GET /api/books` - Get user's books
+- `POST /api/books` - Create new book
+- `PUT /api/books/:id` - Update book
+- `DELETE /api/books/:id` - Delete book
+
+### Sales
+- `GET /api/sales` - Get sales data
+- `POST /api/sales` - Create sale record
+- `GET /api/sales/analytics/overview` - Get analytics overview
+- `GET /api/sales/analytics/monthly` - Get monthly breakdown
+
+### File Upload
+- `POST /api/upload/csv` - Upload CSV sales data
+
+## 🎨 Screenshots
+
+### Dashboard Overview
+![Dashboard](https://via.placeholder.com/600x400/4F46E5/FFFFFF?text=Dashboard+Overview)
+
+### Analytics Charts
+![Analytics](https://via.placeholder.com/600x400/10B981/FFFFFF?text=Analytics+Charts)
+
+### Book Management
+![Books](https://via.placeholder.com/600x400/F59E0B/FFFFFF?text=Book+Management)
+
+## 🤝 Contributing
 
 1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Submit a pull request
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-## License
+## 📝 License
 
-MIT License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- Built with modern web technologies
+- Designed for independent authors and self-publishers
+- Inspired by the need for better book sales analytics
+
+## 📞 Support
+
+If you have any questions or need help:
+
+1. Check the [Issues](https://github.com/zafor158/Niche-Analytics-Dashboard/issues) page
+2. Create a new issue with detailed information
+3. Review the [DEPLOYMENT.md](./DEPLOYMENT.md) guide
+
+## 🎯 Roadmap
+
+- [ ] Advanced reporting features
+- [ ] More platform integrations
+- [ ] Mobile app development
+- [ ] Team collaboration features
+- [ ] Advanced analytics and insights
+
+---
+
+**Made with ❤️ for independent authors**
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/zafor158/Niche-Analytics-Dashboard)
