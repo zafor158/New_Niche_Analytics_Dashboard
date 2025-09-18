@@ -17,5 +17,7 @@
   ],
   "env": {
     "REACT_APP_API_URL": "https://your-backend-url.vercel.app"
-  }
+  },
+  "buildCommand": "npm run build",
+  "outputDirectory": "build"
 }
