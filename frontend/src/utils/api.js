@@ -27,11 +27,30 @@ api.interceptors.request.use(
 api.interceptors.response.use(
   (response) => response,
   (error) => {
+    // Handle network errors
+    if (!error.response) {
+      console.error('Network error:', error.message);
+      return Promise.reject({
+        ...error,
+        message: 'Network error. Please check your connection and try again.'
+      });
+    }
+
+    // Handle 401 Unauthorized
     if (error.response?.status === 401) {
       localStorage.removeItem('token');
       localStorage.removeItem('user');
-      window.location.href = '/login';
+      // Only redirect if not already on login page
+      if (window.location.pathname !== '/login') {
+        window.location.href = '/login';
+      }
     }
+
+    // Handle 500 Server errors
+    if (error.response?.status >= 500) {
+      console.error('Server error:', error.response.data);
+    }
+
     return Promise.reject(error);
   }
 );

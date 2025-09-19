@@ -64,7 +64,26 @@ router.post('/register', validateRegistration, async (req, res) => {
     });
   } catch (error) {
     console.error('Registration error:', error);
-    res.status(500).json({ message: 'Registration failed' });
+    
+    // Handle specific database errors
+    if (error.code === 'P2002') {
+      return res.status(400).json({ 
+        message: 'Email or username already exists' 
+      });
+    }
+    
+    // Handle Prisma connection errors
+    if (error.code === 'P1001') {
+      return res.status(500).json({ 
+        message: 'Database connection failed. Please try again later.' 
+      });
+    }
+    
+    res.status(500).json({ 
+      message: process.env.NODE_ENV === 'development' 
+        ? error.message 
+        : 'Registration failed. Please try again.' 
+    });
   }
 });
 
@@ -109,7 +128,19 @@ router.post('/login', validateLogin, async (req, res) => {
     });
   } catch (error) {
     console.error('Login error:', error);
-    res.status(500).json({ message: 'Login failed' });
+    
+    // Handle Prisma connection errors
+    if (error.code === 'P1001') {
+      return res.status(500).json({ 
+        message: 'Database connection failed. Please try again later.' 
+      });
+    }
+    
+    res.status(500).json({ 
+      message: process.env.NODE_ENV === 'development' 
+        ? error.message 
+        : 'Login failed. Please try again.' 
+    });
   }
 });
 
